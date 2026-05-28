@@ -1,0 +1,75 @@
+{
+  "name": "llm-hub",
+  "version": "1.0.0",
+  "author": "inteye(inteye@gmail.com)",
+  "repository.url": "https://github.com/inteye/llm-hub",
+  "bugs.url": "https://github.com/inteye/llm-hub/issues",
+  "description": "Lightweight frontend LLM integration SDK. Supports OpenAI, Anthropic, DeepSeek, Qwen and more.",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./providers": {
+      "types": "./dist/providers.d.ts",
+      "import": "./dist/providers.mjs",
+      "require": "./dist/providers.cjs"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.mjs",
+      "require": "./dist/types.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "pnpm run build && pnpm run test",
+    "release": "npm publish"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "openai",
+    "anthropic",
+    "deepseek",
+    "qwen",
+    "gemini",
+    "sdk",
+    "frontend",
+    "browser",
+    "chatgpt",
+    "claude",
+    "gpt"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/llm-hub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/llm-hub/issues"
+  },
+  "homepage": "https://github.com/yourusername/llm-hub#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0",
+    "vitest": "^1.6.0"
+  }
+}

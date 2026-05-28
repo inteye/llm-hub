@@ -1,0 +1,42 @@
+{
+  "name": "llm-hub-ui",
+  "version": "1.0.0",
+  "author": "inteye(inteye@gmail.com)",
+  "description": "UI components for llm-hub",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "llm",
+    "ui",
+    "web-components",
+    "config-dialog",
+    "model-selector"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "llm-hub": "^1.0.0"
+  },
+  "devDependencies": {
+    "llm-hub": "workspace:*",
+    "typescript": "^5.4.0",
+    "tsup": "^8.0.0"
+  }
+}
