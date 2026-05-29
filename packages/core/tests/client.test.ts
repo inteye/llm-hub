@@ -1,7 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { LLMHubClient, createClient } from '../src/core/client'
-import { openai } from '../src/providers/openai'
-import { deepseek } from '../src/providers/deepseek'
+import { builtinProviders } from '../src/providers/index'
 
 describe('LLMHubClient', () => {
   it('should create a client with default options', () => {
@@ -9,27 +8,25 @@ describe('LLMHubClient', () => {
     expect(client).toBeInstanceOf(LLMHubClient)
   })
 
-  it('should create a client with providers', () => {
+  it('should create a client with all builtin providers', () => {
     const client = createClient({
-      providers: [openai, deepseek]
+      providers: builtinProviders
     })
     
-    expect(client.listProviders()).toHaveLength(2)
-    expect(client.getProvider('openai')).toBeDefined()
-    expect(client.getProvider('deepseek')).toBeDefined()
+    expect(client.listProviders()).toHaveLength(builtinProviders.length)
   })
 
   it('should register providers after creation', () => {
     const client = createClient()
-    client.registerProvider(openai)
+    client.registerProvider(builtinProviders[0])
     
-    expect(client.getProvider('openai')).toBeDefined()
+    expect(client.getProvider(builtinProviders[0].name)).toBeDefined()
   })
 
   it('should configure and get config', async () => {
     const client = createClient({
       storage: 'memory',
-      providers: [openai]
+      providers: builtinProviders
     })
     
     await client.configure('openai', {
@@ -45,7 +42,7 @@ describe('LLMHubClient', () => {
   it('should remove config', async () => {
     const client = createClient({
       storage: 'memory',
-      providers: [openai]
+      providers: builtinProviders
     })
     
     await client.configure('openai', { apiKey: 'test-key' })
@@ -58,31 +55,35 @@ describe('LLMHubClient', () => {
   it('should list available providers', async () => {
     const client = createClient({
       storage: 'memory',
-      providers: [openai, deepseek]
+      providers: builtinProviders
     })
     
     await client.configure('openai', { apiKey: 'test-key' })
+    await client.configure('deepseek', { apiKey: 'test-key' })
     
     const available = await client.getAvailableProviders()
     expect(available).toContain('openai')
-    expect(available).not.toContain('deepseek')
+    expect(available).toContain('deepseek')
+    expect(available).not.toContain('anthropic')
   })
 
-  it('should get model list', () => {
+  it('should get model list for each provider', () => {
     const client = createClient({
-      providers: [openai]
+      providers: builtinProviders
     })
     
-    const models = client.listModels('openai')
-    expect(models.length).toBeGreaterThan(0)
-    expect(models[0].id).toBeDefined()
-    expect(models[0].name).toBeDefined()
+    for (const provider of builtinProviders) {
+      const models = client.listModels(provider.name)
+      expect(models.length).toBeGreaterThan(0)
+      expect(models[0].id).toBeDefined()
+      expect(models[0].name).toBeDefined()
+    }
   })
 
   it('should emit config change events', async () => {
     const client = createClient({
       storage: 'memory',
-      providers: [openai]
+      providers: builtinProviders
     })
     
     let eventReceived = false
@@ -107,5 +108,19 @@ describe('LLMHubClient', () => {
     await expect(
       client.configure('nonexistent', { apiKey: 'test' })
     ).rejects.toThrow()
+  })
+
+  it('should check if provider supports fetching models', () => {
+    const client = createClient({
+      providers: builtinProviders
+    })
+    
+    // OpenAI compatible providers should support fetching
+    expect(client.canFetchModels('openai')).toBe(true)
+    expect(client.canFetchModels('deepseek')).toBe(true)
+    expect(client.canFetchModels('zhipu')).toBe(true)
+    
+    // Anthropic does not support fetching
+    expect(client.canFetchModels('anthropic')).toBe(false)
   })
 })

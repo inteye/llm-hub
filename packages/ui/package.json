@@ -1,7 +1,7 @@
 {
-  "name": "llm-hub-ui",
+  "name": "@inteye/llm-hub-ui",
   "version": "1.0.0",
-  "author": "inteye(inteye@gmail.com)",
+  "author": "inteye <inteye@gmail.com>",
   "description": "UI components for llm-hub",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -15,7 +15,8 @@
     "./style.css": "./dist/style.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsup",
@@ -32,10 +33,10 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "llm-hub": "^1.0.0"
+    "@inteye/llm-hub": "^1.0.0"
   },
   "devDependencies": {
-    "llm-hub": "workspace:*",
+    "@inteye/llm-hub": "workspace:*",
     "typescript": "^5.4.0",
     "tsup": "^8.0.0"
   }

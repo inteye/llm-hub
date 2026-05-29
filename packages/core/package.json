@@ -1,9 +1,6 @@
 {
-  "name": "llm-hub",
-  "version": "1.0.0",
-  "author": "inteye(inteye@gmail.com)",
-  "repository.url": "https://github.com/inteye/llm-hub",
-  "bugs.url": "https://github.com/inteye/llm-hub/issues",
+  "name": "@inteye/llm-hub",
+  "version": "1.0.3",
   "description": "Lightweight frontend LLM integration SDK. Supports OpenAI, Anthropic, DeepSeek, Qwen and more.",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -54,16 +51,16 @@
     "claude",
     "gpt"
   ],
-  "author": "Your Name <your.email@example.com>",
+  "author": "inteye <inteye@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yourusername/llm-hub.git"
+    "url": "git+https://github.com/inteye/llm-hub.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/llm-hub/issues"
+    "url": "https://github.com/inteye/llm-hub/issues"
   },
-  "homepage": "https://github.com/yourusername/llm-hub#readme",
+  "homepage": "https://github.com/inteye/llm-hub#readme",
   "engines": {
     "node": ">=18"
   },
