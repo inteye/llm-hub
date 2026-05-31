@@ -185,7 +185,7 @@ interface ModelSelectorOptions {
 
 ## 依赖
 
-- `@inteye/llm-hub` ^1.0.0 (peer dependency)
+- `@inteye/llm-hub` ^1.0.3 (peer dependency)
 
 ## 许可证
 

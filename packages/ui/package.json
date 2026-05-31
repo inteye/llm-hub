@@ -1,6 +1,6 @@
 {
   "name": "@inteye/llm-hub-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "inteye <inteye@gmail.com>",
   "description": "UI components for llm-hub",
   "main": "./dist/index.cjs",
